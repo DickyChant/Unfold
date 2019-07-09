@@ -430,6 +430,7 @@ void unfold(){
       h3[4]->Fill((q1+q4)/2,(q1-q4)/2,q1q2.Re());
       h3[6]->Fill((q1+q4)/2*cos(The),(q1+q4)/2*sin(The),(q1-q4)/2);
       h3[7]->Fill((q1+q4)/2,(q1-q4)/2,the);
+      h3[8]->Fill((q1+q4)/2,(q1-q4)/2,the);
     //h3[1]->Fill(q1,q2,the*(q1+q2)/2);
 //    Int_t number_dec = detectorDistribution->GetGlobalBinNumber(q1,q2,the);
 //    Int_t number_gen = bgrBinning->GetGlobalBinNumber(v1,v1,the2);
@@ -447,6 +448,7 @@ void unfold(){
     h3[2]->Write();
     h3[6]->Write();
     h3[7]->Write();
+    h3[8]->Write();
     h5->Write();
     h4->Write();
     h3[4]->Write();
@@ -454,7 +456,7 @@ void unfold(){
     new TCanvas();
     h3[7]->Draw("iso");
     new TCanvas();
-    h3[6]->Draw("iso");
+    h3[8]->Draw("iso");
     TH1*ht[10],*htmp;
     htmp =  h3[7]->Project3D("zx"); htmp->Write();ht[0] = htmp;
     htmp =  h3[7]->Project3D("zy"); htmp->Write();ht[1] = htmp;
