@@ -287,6 +287,9 @@ void unfold(){
     h3[7]=new TH3D("h3_7","h3_7",BIN_NUM,0,ran1,BIN_NUM,-5*vs,5*vs,BIN_NUM,-pi,pi);
     h3[7]->SetXTitle("(q1+q2)/2_data");    h3[7]->SetYTitle("(q1-q2)/2_data");     h3[7]->SetZTitle("theta");
     
+    h3[8]=new TH3D("h3_7","h3_7",BIN_NUM,0,ran1,10,-2*vs,2*vs,BIN_NUM,-pi,pi);
+    h3[8]->SetXTitle("(q1+q2)/2_data");    h3[8]->SetYTitle("(q1-q2)/2_data");     h3[8]->SetZTitle("theta");
+    
   
   
 
