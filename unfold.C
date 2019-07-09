@@ -287,8 +287,11 @@ void unfold(){
     h3[7]=new TH3D("h3_7","h3_7",BIN_NUM,0,ran1,BIN_NUM,-5*vs,5*vs,BIN_NUM,-pi,pi);
     h3[7]->SetXTitle("(q1+q2)/2_data");    h3[7]->SetYTitle("(q1-q2)/2_data");     h3[7]->SetZTitle("theta");
     
-    h3[8]=new TH3D("h3_8","h3_8",BIN_NUM,0,ran1,10,-2*vs,2*vs,BIN_NUM,-pi,pi);
+    h3[8]=new TH3D("h3_8","h3_8",BIN_NUM,0,ran1,10,-2*vs,2*vs,20,-pi,pi);
     h3[8]->SetXTitle("(q1+q2)/2_data");    h3[8]->SetYTitle("(q1-q2)/2_data");     h3[8]->SetZTitle("theta");
+    
+    h3[9]=new TH3D("h3_9","h3_9",BIN_NUM,0,ran1,10,-2*vs,2*vs,20,-pi,pi);
+    h3[9]->SetXTitle("(v1+v2)/2_data");    h3[9]->SetYTitle("(v1-v2)/2_data");     h3[9]->SetZTitle("vtheta");
     
   
   
@@ -336,6 +339,14 @@ void unfold(){
 //
     TH1D *h1 = new TH1D("q1_data","q1_data",BIN_NUM,0,ran1);
     TH1D *h6 = new TH1D("v1_data","v1_data",BIN_NUM,0,ran1);
+    
+    
+    TH1D *P=new TH1D("v/q_p","v/q_p",50,0,ran1);
+    TH1D *M=new TH1D("v/q_m","v/q_m",10,-2*vs,2*vs);
+    TH1D *T=new TH1D("v/q_the","v/q_the",20,-pi,pi);
+    
+    TH1D *Uv=new TH1D("v for Unfold","v for Unfold",10000,0,10000);
+    TH1D *Uq=new TH1D("q for Unfold","q for Unfold",10000,0,10000);
 
   
 
@@ -359,12 +370,30 @@ void unfold(){
       double q2 = sqrt(q2x*q2x+q2y*q2y);
       double q4 = V2.Rho();
       TComplex q1q2=V2*V2.Conjugate(V1);
+      double The=q1q2.Theta();
       double the = V3.Theta();
       TComplex V4(v1,0);
       TComplex V5=(V4*V4.Conjugate(V4))/v1;
       double the2=V5.Theta();
       if(the>pi) the-=pi2; if(the<-pi) the+=pi2;
       if(the2>pi) the2-=pi2; if(the2<-pi) the2+=pi2;
+      
+      
+      
+      h3[9]->Fill(v1,0,0);
+      h3[8]->Fill((q1+q4)/2,(q1-q4)/2,the);
+      //h3[1]->Fill(q1,q2,the*(q1+q2)/2);
+      //    Int_t number_dec = detectorDistribution->GetGlobalBinNumber(q1,q2,the);
+      //    Int_t number_gen = bgrBinning->GetGlobalBinNumber(v1,v1,the2);
+      h5->Fill(v1);
+      h4->Fill(q1);
+      
+      double vp=(v1+v2)/2;
+      double vm=(v1-v2)/2;
+      double qp=(q1+q4)/2;
+      double qm=(q1-q4)/2;
+      int v_index=P->FindBin(vp)*200+M->FindBin(vm)*20+T->FindBin(the1);
+      int q_index=P->FindBin(qp)*200+M->FindBin(qm)*20+T->FindBin(the);
     
     h3[3]->Fill(q1,q2,the);
     h3[5]->Fill((q1+q4)/2,(q1-q4)/2,q1q2.Re());
@@ -373,7 +402,8 @@ void unfold(){
 //    Int_t number_gen = bgrBinning->GetGlobalBinNumber(v1,v1,the2);
     h1->Fill(q1);
     h6->Fill(v1);
-    
+      Uv->Fill(v_index);
+      Uq->Fill(q_index);
       
       
 
@@ -385,6 +415,8 @@ void unfold(){
     h6->Write();
     h3[3]->Write();
     h3[5]->Write();
+    Uv->Write();
+    Uq->Write();
   
 //  TH2 *histMCGenRec=TUnfoldBinning::CreateHistogramOfMigrations
 //     (generatorBinning,detectorBinning,"histMCGenRec");
