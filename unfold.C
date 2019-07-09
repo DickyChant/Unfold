@@ -345,8 +345,8 @@ void unfold(){
     TH1D *M=new TH1D("v/q_m","v/q_m",10,-2*vs,2*vs);
     TH1D *T=new TH1D("v/q_the","v/q_the",20,-pi,pi);
     
-    TH1D *Uv=new TH1D("v for Unfold","v for Unfold",10000,0,10000);
-    TH1D *Uq=new TH1D("q for Unfold","q for Unfold",10000,0,10000);
+    TH1D *Uv=new TH1D("v_for_Unfold","v_for_Unfold",10000,0,10000);
+    TH1D *Uq=new TH1D("q_for_Unfold","q_for_Unfold",10000,0,10000);
 
   
 
@@ -420,7 +420,8 @@ void unfold(){
     TH2D *histM = new TH2D("mig","mig",10000,0,10000,10000,0,10000);
     TH1D *h5 = new TH1D("q1_simulate","q1_simulate",BIN_NUM,0,ran1);
     TH1D *h4 = new TH1D("v1_simulate","v1_simulate",BIN_NUM,0,ran1);
-    
+    TH1D *Tv=new TH1D("v_for_Train","v_for_Train",10000,0,10000);
+    TH1D *Tq=new TH1D("q_for_Train","q_for_Train",10000,0,10000);
   
   for(int ir=0;ir<10000000;ir++){
     double v1 = fun->GetRandom();
@@ -474,6 +475,8 @@ void unfold(){
       int q_index=P->FindBin(qp)*200+M->FindBin(qm)*20+T->FindBin(the);
       
       histM->Fill(v_index,q_index);
+      Tv->Fill(v_index);
+      Tq->Fill(q_index);
       
 
     
@@ -481,7 +484,8 @@ void unfold(){
 
   }
     h3[0]->Write();
-    
+    Tv->Write();
+    Tq->Write();
     h3[1]->Write();
     h3[2]->Write();
     h3[6]->Write();
