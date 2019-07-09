@@ -421,7 +421,7 @@ void unfold(){
     h3[1]->Fill(q1,q2,the);
     h3[2]->Fill(v1,v1,the2);
       h3[4]->Fill((q1+q4)/2,(q1-q4)/2,q1q2.Re());
-      h3[6]->Fill((q1+q4)/2*cos(The),(q1+q4)/2*cos(The),(q1-q4)/2);
+      h3[6]->Fill((q1+q4)/2*cos(The),(q1+q4)/2*sin(The),(q1-q4)/2);
     //h3[1]->Fill(q1,q2,the*(q1+q2)/2);
 //    Int_t number_dec = detectorDistribution->GetGlobalBinNumber(q1,q2,the);
 //    Int_t number_gen = bgrBinning->GetGlobalBinNumber(v1,v1,the2);
