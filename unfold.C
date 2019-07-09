@@ -389,13 +389,21 @@ void unfold(){
 //  TH2 *histMCGenRec=TUnfoldBinning::CreateHistogramOfMigrations
 //     (generatorBinning,detectorBinning,"histMCGenRec");
     TH2D *histMCGenRec = new TH2D("mig_matrix","mig_matrix",BIN_NUM,0,ran1,BIN_NUM,0,ran1);
+    TH2D *histM = new TH2D("mig","mig",25000,0,25000,25000,0,25000);
     TH1D *h5 = new TH1D("q1_simulate","q1_simulate",BIN_NUM,0,ran1);
     TH1D *h4 = new TH1D("v1_simulate","v1_simulate",BIN_NUM,0,ran1);
+    
+    TH1D *P=new TH1D("v/q_p","v/q_p",50,0,ran1);
+    TH1D *M=new TH1D("v/q_m","v/q_m",10,-2*vs,2*vs);
+    TH1D *T=new TH1D("v/q_the","v/q_the",50,-pi,pi);
+    
+    
  
   
   
   for(int ir=0;ir<10000000;ir++){
     double v1 = fun->GetRandom();
+      double v2 = fun->GetRandom();
     double the1=gran->Rndm()*pi2; //angle for v1
 
     double x1 = gran->Gaus(0,sig);
@@ -407,7 +415,7 @@ void unfold(){
 
     double x3 = gran->Gaus(0,sig);
 
-    TComplex V1(v1+x1,y1),V2(v1+x2,y2);
+    TComplex V1(v1+x1,y1),V2(v2*cos(the1)+x2,v2*sin(the1)+y2);
     double q1 = V1.Rho();
     TComplex V3=(V2*V2.Conjugate(V1))/q1;
     double q2x=V3.Re(),q2y=V3.Im();
@@ -437,6 +445,15 @@ void unfold(){
       h5->Fill(v1);
       h4->Fill(q1);
     histMCGenRec->Fill(q1,v1);
+      double vp=(v1+v2)/2;
+      double vm=(v1-v2)/2;
+      double qp=(q1+q4)/2;
+      double qm=(q1-q4)/2;
+      int v_index=P->FindBin(vp)*500+M->FindBin(vm)*50+T->FindBin(the1);
+      int q_index=P->FindBin(qp)*500+M->FindBin(qm)*50+T->FindBin(the);
+      
+      histM->Fill(v_index,q_index);
+      
 
     
 
@@ -453,6 +470,7 @@ void unfold(){
     h4->Write();
     h3[4]->Write();
     histMCGenRec->Write();
+    histM->Write();
     new TCanvas();
     h3[7]->Draw("iso");
     new TCanvas();
