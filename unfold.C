@@ -389,13 +389,13 @@ void unfold(){
 //  TH2 *histMCGenRec=TUnfoldBinning::CreateHistogramOfMigrations
 //     (generatorBinning,detectorBinning,"histMCGenRec");
     TH2D *histMCGenRec = new TH2D("mig_matrix","mig_matrix",BIN_NUM,0,ran1,BIN_NUM,0,ran1);
-    TH2D *histM = new TH2D("mig","mig",25000,0,25000,25000,0,25000);
+    TH2D *histM = new TH2D("mig","mig",10000,0,10000,10000,0,10000);
     TH1D *h5 = new TH1D("q1_simulate","q1_simulate",BIN_NUM,0,ran1);
     TH1D *h4 = new TH1D("v1_simulate","v1_simulate",BIN_NUM,0,ran1);
     
     TH1D *P=new TH1D("v/q_p","v/q_p",50,0,ran1);
     TH1D *M=new TH1D("v/q_m","v/q_m",10,-2*vs,2*vs);
-    TH1D *T=new TH1D("v/q_the","v/q_the",50,-pi,pi);
+    TH1D *T=new TH1D("v/q_the","v/q_the",20,-pi,pi);
     
     
  
@@ -449,8 +449,8 @@ void unfold(){
       double vm=(v1-v2)/2;
       double qp=(q1+q4)/2;
       double qm=(q1-q4)/2;
-      int v_index=P->FindBin(vp)*500+M->FindBin(vm)*50+T->FindBin(the1);
-      int q_index=P->FindBin(qp)*500+M->FindBin(qm)*50+T->FindBin(the);
+      int v_index=P->FindBin(vp)*200+M->FindBin(vm)*20+T->FindBin(the1);
+      int q_index=P->FindBin(qp)*200+M->FindBin(qm)*20+T->FindBin(the);
       
       histM->Fill(v_index,q_index);
       
