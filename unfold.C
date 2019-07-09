@@ -451,6 +451,7 @@ void unfold(){
     htmp =  h3[6]->Project3D("zx"); htmp->Write();ht[3] = htmp;
     htmp =  h3[6]->Project3D("zy"); htmp->Write();ht[4] = htmp;
     htmp =  h3[6]->Project3D("yx"); htmp->Write();ht[5] = htmp;
+    
     TCanvas *c1 = new TCanvas("c2","c2",1200,900);
     c1->Divide(3,2);
     
@@ -459,9 +460,9 @@ void unfold(){
     c1->cd(1);  ht[0]->Draw("colz");
     c1->cd(2);  ht[1]->Draw("colz");
     c1->cd(3);  ht[2]->Draw("colz");
-    c1->cd(4);  ht[4]->Draw("colz");
-    c1->cd(5);  ht[5]->Draw("colz");
-    c1->cd(6);  ht[6]->Draw("colz");
+    c1->cd(4);  ht[3]->Draw("colz");
+    c1->cd(5);  ht[4]->Draw("colz");
+    c1->cd(6);  ht[5]->Draw("colz");
     c1->Write();
     
     
