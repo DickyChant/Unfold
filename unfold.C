@@ -283,6 +283,10 @@ void unfold(){
     
     h3[6]=new TH3D("h3_6","h3_6",BIN_NUM,-ran1,ran1,BIN_NUM,-ran1,ran1,BIN_NUM,-5*vs,5*vs);
     h3[6]->SetXTitle("(q1+q2)/2_cos");    h3[6]->SetYTitle("(q1+q2)/2_sin");     h3[6]->SetZTitle("(q1-q2)/2");
+    
+    h3[7]=new TH3D("h3_5","h3_5",BIN_NUM,0,ran1,BIN_NUM,-5*vs,5*vs,BIN_NUM,-pi,pi);
+    h3[7]->SetXTitle("(q1+q2)/2_data");    h3[7]->SetYTitle("(q1-q2)/2_data");     h3[7]->SetZTitle("theta");
+    
   
   
 
@@ -422,6 +426,7 @@ void unfold(){
     h3[2]->Fill(v1,v1,the2);
       h3[4]->Fill((q1+q4)/2,(q1-q4)/2,q1q2.Re());
       h3[6]->Fill((q1+q4)/2*cos(The),(q1+q4)/2*sin(The),(q1-q4)/2);
+      h3[7]->Fill((q1+q4)/2,(q1-q4)/2,the);
     //h3[1]->Fill(q1,q2,the*(q1+q2)/2);
 //    Int_t number_dec = detectorDistribution->GetGlobalBinNumber(q1,q2,the);
 //    Int_t number_gen = bgrBinning->GetGlobalBinNumber(v1,v1,the2);
@@ -438,16 +443,19 @@ void unfold(){
     h3[1]->Write();
     h3[2]->Write();
     h3[6]->Write();
+    h3[7]->Write();
     h5->Write();
     h4->Write();
     h3[4]->Write();
     histMCGenRec->Write();
     new TCanvas();
-    h3[4]->Draw("iso");
+    h3[7]->Draw("iso");
+    new TCanvas();
+    h3[6]->Draw("iso");
     TH1*ht[10],*htmp;
-    htmp =  h3[4]->Project3D("zx"); htmp->Write();ht[0] = htmp;
-    htmp =  h3[4]->Project3D("zy"); htmp->Write();ht[1] = htmp;
-    htmp =  h3[4]->Project3D("yx"); htmp->Write();ht[2] = htmp;
+    htmp =  h3[7]->Project3D("zx"); htmp->Write();ht[0] = htmp;
+    htmp =  h3[7]->Project3D("zy"); htmp->Write();ht[1] = htmp;
+    htmp =  h3[7]->Project3D("yx"); htmp->Write();ht[2] = htmp;
     htmp =  h3[6]->Project3D("zx"); htmp->Write();ht[3] = htmp;
     htmp =  h3[6]->Project3D("zy"); htmp->Write();ht[4] = htmp;
     htmp =  h3[6]->Project3D("yx"); htmp->Write();ht[5] = htmp;
