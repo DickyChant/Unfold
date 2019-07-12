@@ -19,10 +19,10 @@
 #include "TLegend.h"
 #include "TComplex.h"
 #include "TSystem.h"
-#include "/Users/dickie/codes/RooUnfold/src/RooUnfoldResponse.h"
-#include "/Users/dickie/codes/RooUnfold/src/RooUnfoldBayes.h"
-#include "/Users/dickie/codes/RooUnfold/src/RooUnfoldSvd.h"
-#include "/Users/dickie/codes/RooUnfold/src/RooUnfoldTUnfold.h"
+#include "/Users/dicky/codes/RooUnfold/src/RooUnfoldResponse.h"
+#include "/Users/dicky/codes/RooUnfold/src/RooUnfoldBayes.h"
+#include "/Users/dicky/codes/RooUnfold/src/RooUnfoldSvd.h"
+#include "/Users/dicky/codes/RooUnfold/src/RooUnfoldTUnfold.h"
 #endif
 
 #define NBIN 22050
