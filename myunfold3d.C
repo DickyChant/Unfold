@@ -253,40 +253,32 @@ void myunfold_1()
     response.Write();
      histM->Write();
     
-    char name[100];
-    
-    for(int ii=0;ii<9;ii++)
-    {
-        sprintf(name,"itr_%d",NITERS[ii]);
-        if(NITERS[ii]==0)
-        {
-            TCanvas* canRefold = new TCanvas("unfold","hunfold", 800, 600);
+    // char name[100];
+    // TCanvas* canRefold = new TCanvas("unfold","hunfold", 800, 600);
+
+    // for(int ii=0;ii<9;ii++)
+    // {
+    //     sprintf(name,"itr_%d",NITERS[ii]);
+    //     if(NITERS[ii]==0)
+    //     {
+    //         Uv->Draw();
+    //         Uq->Draw("same");
+    //     }
+    //     else{
+    //         RooUnfoldBayes unfold (&response, Uq, NITERS[ii]);
             
-            Uv->Draw();
-            Uq->Draw("same");
-            
-        }
-        else{
-            RooUnfoldBayes unfold (&response, Uq, NITERS[ii]);
-            
-            TH1D* hReco;
-            hReco = (TH1D*) unfold.Hreco();
-            hReco->Write();
-            TH1D*h=(TH1D*)hReco->Clone(name);
-            h->SetTitle(name);
-            h->Write();
-            h->Draw("same");
-            h->SetMarkerStyle(20);
-            h->SetMarkerColor(ii);
-        }
-        
-       
-    }
-    
-    
-    
-    
-    
+    //         TH1D* hReco;
+    //         hReco = (TH1D*) unfold.Hreco();
+    //         hReco->Write();
+    //         TH1D*h=(TH1D*)hReco->Clone(name);
+    //         h->SetTitle(name);
+    //         h->Write();
+    //         h->Draw("same");
+    //         h->SetMarkerStyle(20);
+    //         h->SetMarkerColor(ii);
+    //     }
+    //     canRefold->Write();
+    // }
 }
 
 
